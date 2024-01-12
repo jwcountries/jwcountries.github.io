@@ -1140,10 +1140,9 @@
 			worldMap.setAttribute("width",  svgDims.width);
 			worldMap.setAttribute("height", svgDims.height);
 
-		//	while (worldMap.firstChild)
-		//		worldMap.removeChild(worldMap.firstChild);
-		//   addPaths();
-		// Keep this around in case resizing breaks again :(
+			while (worldMap.firstChild)
+				worldMap.removeChild(worldMap.firstChild);
+			addPaths();
 		});
 
 		function latLongToSVG(lat, long)
