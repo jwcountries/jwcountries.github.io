@@ -1133,19 +1133,6 @@
 		};
 		calculateSvgDimensions(svgDims);
 
-	//	window.addEventListener("resize", function() { // keep around, just in case.
-		window.addEventListener("orientationchange", function() {
-			document.getElementById('dropdown').style.display = 'none'; // hide it, rather than recalculate the proper position.
-
-			calculateSvgDimensions(svgDims);
-			worldMap.setAttribute("width",  svgDims.width);
-			worldMap.setAttribute("height", svgDims.height);
-
-			while (worldMap.firstChild)
-				worldMap.removeChild(worldMap.firstChild);
-			addPaths();
-		});
-
 		function latLongToSVG(lat, long)
 		{   // Convert latitude and longitude to SVG coordinates.  
 			// TODO/REVIEW should I use Mercator projection?
@@ -1392,6 +1379,26 @@
 			}
 
 		}, { passive: false });
+
+		//	window.addEventListener("resize", function() { // keep around, just in case.
+		window.addEventListener("orientationchange", function() {
+			document.getElementById('dropdown').style.display = 'none'; // hide it, rather than recalculate the proper position.
+
+			calculateSvgDimensions(svgDims);
+			worldMap.setAttribute("width",  svgDims.width);
+			worldMap.setAttribute("height", svgDims.height);
+
+			while (worldMap.firstChild)
+				worldMap.removeChild(worldMap.firstChild);
+			addPaths();
+
+			motion = MotionType.None; // not in a zoom anymore
+			viewBox.x = 0;
+			viewBox.y = 0;
+			viewBox.width  = svgDims.width;
+			viewBox.height = svgDims.height;
+			worldMap.setAttribute('viewBox', `0 0 ${viewBox.width} ${viewBox.height}`); // zoom out 1-1
+		});
 
 		// Set the worldMap's width based on the window's width
 		worldMap.setAttribute("width",  svgDims.width);
