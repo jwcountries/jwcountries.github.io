@@ -1133,8 +1133,9 @@
 		};
 		calculateSvgDimensions(svgDims);
 
-		window.addEventListener("resize", function() {
-			calculateSvgDimensions(svgDims);
+	//	window.addEventListener("resize", function() { // keep around, just in case.
+		window.addEventListener("orientationchange", function() {
+				calculateSvgDimensions(svgDims);
 
 			worldMap.setAttribute("width",  svgDims.width);
 			worldMap.setAttribute("height", svgDims.height);
