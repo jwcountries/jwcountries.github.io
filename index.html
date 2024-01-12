@@ -1135,8 +1135,9 @@
 
 	//	window.addEventListener("resize", function() { // keep around, just in case.
 		window.addEventListener("orientationchange", function() {
-				calculateSvgDimensions(svgDims);
+			document.getElementById('dropdown').style.display = 'none'; // hide it, rather than recalculate the proper position.
 
+			calculateSvgDimensions(svgDims);
 			worldMap.setAttribute("width",  svgDims.width);
 			worldMap.setAttribute("height", svgDims.height);
 
